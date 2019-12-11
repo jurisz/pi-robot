@@ -1,0 +1,8 @@
+
+## installed image
+?
+
+## wifi setup
+
+
+ 
