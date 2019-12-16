@@ -3,6 +3,7 @@
 import cv2
 import numpy as np
 
+
 def auto_canny(image, sigma=0.33):
     # compute the median of the single channel pixel intensities
     v = np.median(image)
@@ -14,6 +15,7 @@ def auto_canny(image, sigma=0.33):
 
     # return the edged image
     return edged
+
 
 def automatic_brightness_and_contrast(image, clip_hist_percent=1):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -61,31 +63,34 @@ def automatic_brightness_and_contrast(image, clip_hist_percent=1):
 
 
 img = cv2.imread('../1/sample-2019-12-15_06:57-2.jpg')
-contrasted, alpha, beta = automatic_brightness_and_contrast(img, 1)
-gray = cv2.cvtColor(contrasted, cv2.COLOR_BGR2GRAY)
+#contrasted, alpha, beta = automatic_brightness_and_contrast(img, 1)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # edges = cv2.Canny(gray, 50, 500, apertureSize=3)
 
 edges = auto_canny(img)
 
-lines = cv2.HoughLines(edges, 1, np.pi / 180, 200)
+lines = cv2.HoughLines(edges, 1, np.pi / 180, 100)
 
-print(lines)
-# for rho, theta in lines[0]:
-#     a = np.cos(theta)
-#     b = np.sin(theta)
-#     x0 = a * rho
-#     y0 = b * rho
-#     x1 = int(x0 + 1000 * (-b))
-#     y1 = int(y0 + 1000 * (a))
-#     x2 = int(x0 - 1000 * (-b))
-#     y2 = int(y0 - 1000 * (a))
-#
-#     cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
+print('line type: %s' % type(lines))
+print('Found lines: %s' % lines)
 
-# cv2.imwrite('houghlines3.jpg', img)
+if lines is not None:
+    for i in range(0, min(len(lines), 2)):
+        rho = lines[i][0][0]
+        theta = lines[i][0][1]
+        a = np.cos(theta)
+        b = np.sin(theta)
+        x0 = a * rho
+        y0 = b * rho
+        pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * a))
+        pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * a))
 
-# cv2.imshow('image', img)
+        cv2.line(img, pt1, pt2, (0, 0, 255), 3, 1)
+
+    # cv2.imwrite('houghlines3.jpg', img)
+
+cv2.imshow('image', img)
 # cv2.imshow('image', gray)
-cv2.imshow('image', edges)
+# cv2.imshow('image', edges)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
