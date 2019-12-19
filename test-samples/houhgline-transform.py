@@ -62,9 +62,9 @@ def automatic_brightness_and_contrast(image, clip_hist_percent=1):
     return auto_result, alpha, beta
 
 
-img = cv2.imread('../1/sample-2019-12-15_06:57-2.jpg')
+img = cv2.imread('../1/sample-2019-12-19_16:56-5.jpg')
 #contrasted, alpha, beta = automatic_brightness_and_contrast(img, 1)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # edges = cv2.Canny(gray, 50, 500, apertureSize=3)
 
 edges = auto_canny(img)
