@@ -62,20 +62,20 @@ def automatic_brightness_and_contrast(image, clip_hist_percent=1):
     return auto_result, alpha, beta
 
 
-img = cv2.imread('../1/sample-2019-12-19_16:56-5.jpg')
-#contrasted, alpha, beta = automatic_brightness_and_contrast(img, 1)
-#gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img = cv2.imread('../2/sample-2019-12-22_11:11-2.jpg')
+# contrasted, alpha, beta = automatic_brightness_and_contrast(img, 1)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # edges = cv2.Canny(gray, 50, 500, apertureSize=3)
 
-edges = auto_canny(img)
-
-lines = cv2.HoughLines(edges, 1, np.pi / 180, 100)
+edges = cv2.blur(img, (5, 5))
+edges = auto_canny(edges)
+lines = cv2.HoughLines(edges, 2, np.pi / 180, 300)
 
 print('line type: %s' % type(lines))
 print('Found lines: %s' % lines)
 
 if lines is not None:
-    for i in range(0, min(len(lines), 2)):
+    for i in range(0, min(len(lines), 4)):
         rho = lines[i][0][0]
         theta = lines[i][0][1]
         a = np.cos(theta)
