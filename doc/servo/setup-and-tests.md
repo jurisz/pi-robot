@@ -32,4 +32,6 @@ Pi config:
  ![](servos-2.jpg) <br>
  
 Video:   
- https://www.youtube.com/watch?v=E5VS4s-R7vk
+ https://www.youtube.com/watch?v=kzOL9dXhh7E
+
+Seems not enough power, hands are shaking on some steps 
