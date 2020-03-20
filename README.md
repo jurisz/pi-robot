@@ -7,6 +7,8 @@ building pi robot
 
 - [temp notes](doc/readme-tmp.txt) 
 
+- [servos setup and tests](doc/servo/setup-and-tests.md)
+
 - Pi gipo pin out
  ![Pi gpio](doc/pi-gpio-numbers-pi2.png)
 
