@@ -9,8 +9,8 @@ import time
 fPWM = 50
 i2c_address = 0x40 # (standard) adapt to your module
 channel = 0 # adapt to your wiring
-a = 10 # adapt to your servo
-b = 5  # adapt to your servo
+a = 8.6 # adapt to your servo
+b = 2  # adapt to your servo
 
 def setup():
     global pwm
