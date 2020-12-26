@@ -14,8 +14,8 @@ GPIO.setup(motorPin, GPIO.OUT)
 fPWM = 50
 i2c_address = 0x40 # (standard) adapt to your module
 channel = 0 # adapt to your wiring
-a = 10 # adapt to your servo
-b = 5  # adapt to your servo
+a = 8.6 # adapt to your servo
+b = 2  # adapt to your servo
 
 def setup():
     global pwm
@@ -32,11 +32,11 @@ def setDirection(direction):
     time.sleep(1)
 
 def turnLeft(deg):
-    setDirection(90 + deg)
+    setDirection(90 - deg)
 
 
 def turnRight(deg):
-    setDirection(90 -deg)
+    setDirection(90 + deg)
 
 
 def drive(seconds):
@@ -45,17 +45,23 @@ def drive(seconds):
     GPIO.output(motorPin, GPIO.LOW)
 
 setup()
-turnRight(90)
 
-time.sleep(5)
+time.sleep(1)
+turnLeft(0)
 
-print("turing left 10")
-turnLeft(10)
+drive(5)
 
-print("turing right 10")
-turnRight(10)
+print("turing left ")
+turnLeft(12)
+drive(3)
 
 
+print("turing right ")
+turnRight(12)
+drive(3)
+
+turnLeft(0)
+drive(10)
 
 # good practise to cleanup GPIO at some point before exit
 GPIO.cleanup()
